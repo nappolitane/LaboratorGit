@@ -2,21 +2,25 @@ import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 public class Biblioteca {
-    private ArrayList<Carte> mData;
+    private ArrayList<Carte> listaCarti;
 
     //region Constructors
     public Biblioteca(){
-        mData = new ArrayList<Carte>();
+        listaCarti = new ArrayList<Carte>();
+    }
+
+    public Biblioteca(ArrayList<Carte> listaCarti) {
+        this.listaCarti = listaCarti;
     }
     //endregion
 
     //region Getters
     public int getNrCarti(){
-        return mData.size();
+        return listaCarti.size();
     }
 
     public Carte getCarte(int index){
-        return mData.get(index);
+        return listaCarti.get(index);
     }
     //endregion
 
@@ -24,22 +28,22 @@ public class Biblioteca {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (Carte mDatum : mData) builder.append("\n").append(mDatum.toString());
+        for (Carte mDatum : listaCarti) builder.append("\n").append(mDatum.toString());
 
         return builder.toString();
     }
 
     public void add(Carte c){
-        mData.add(c);
+        listaCarti.add(c);
     }
 
     public void sortByNrPagini(){
-        for(int i = 0; i < mData.size() - 1; i++) {
-            for (int j = 0; j < mData.size() - i - 1; j++) {
-                if (mData.get(j).compareTo(mData.get(j + 1)) == 1) {
-                    Carte aux = mData.get(j);
-                    mData.set(j, mData.get(j + 1));
-                    mData.set(j + 1, aux);
+        for(int i = 0; i < listaCarti.size() - 1; i++) {
+            for (int j = 0; j < listaCarti.size() - i - 1; j++) {
+                if (listaCarti.get(j).compareTo(listaCarti.get(j + 1)) == 1) {
+                    Carte aux = listaCarti.get(j);
+                    listaCarti.set(j, listaCarti.get(j + 1));
+                    listaCarti.set(j + 1, aux);
                 }
             }
         }
@@ -49,5 +53,9 @@ public class Biblioteca {
         for (int i = 0; i < b.getNrCarti(); i++){
             this.add(b.getCarte(i));
         }
+    }
+
+    public void removeCarte(Carte c){
+        listaCarti.remove(c);
     }
 }
